@@ -1,0 +1,34 @@
+{
+  "name": "eddystone",
+  "version": "1.0.0",
+  "title": "Eddystone Scan",
+  "description": "App that scans for Eddystone beacons to be used as a start for Eddystone apps.",
+  "tags": [
+    {
+      "label": "eddystone",
+      "type": "platform"
+    },
+    {
+      "label": "ble",
+      "type": "comm"
+    }
+  ],
+  "libraries": [
+    {
+      "name": "jquery",
+      "version": "2.1.1"
+    }
+  ],
+  "plugins": [
+    {
+      "name": "cordova-plugin-ble",
+      "version": "2.0.0"
+    }
+  ],
+  "index-file": "index.html",
+  "uuid": "78abd93c-1ed2-4c3a-96f7-4066d4e77bd8",
+  "icon": "app-icon.png",
+  "doc-url": "http://evothings.com/2.2/doc/examples/eddystone-scan.html",
+  "long-description": "App that scans for Eddystone beacons and can be used as a starting point for Eddystone apps.",
+  "cordova-id": "com.evothings.examples.eddystonescan"
+}
