@@ -10,7 +10,6 @@ var app = (function()
 
 	// Timer that displays list of beacons.
 	var updateTimer = null;
-	var updateTimer2 = null;
 	app.initialize = function()
 	{
 		document.addEventListener(
@@ -26,7 +25,6 @@ var app = (function()
 
 		// Display refresh timer.
 		updateTimer = setInterval(displayBeaconList, 500);
-		updateTimer2 = setInterval(displayRadPoints, 500);
 	}
 
 	function startScan()
@@ -75,7 +73,7 @@ var app = (function()
 	{
 		// Clear beacon display list.
 		$('#found-beacons').empty();
-
+		//$('#radBeacons').empty();
 
 		// Update beacon display list.
 		var timeNow = Date.now();
@@ -106,42 +104,14 @@ var app = (function()
 
 				$('#message').remove();
 				$('#found-beacons').append(element);
-			}
-		});
-	}
-
-	function displayRadPoints()
-	{
-		// Clear beacon display list.
-		$('#radBeacons').empty();
-
-
-		// Update beacon display list.
-		var timeNow = Date.now();
-		$.each(getSortedBeaconList(beacons), function(index, beacon)
-		{
-			// Only show beacons that are updated during the last 10 seconds.
-			if (beacon.name == "RADIATION" && beacon.rssi > -74 && beacon.timeStamp + 10000 > timeNow)
+				if (beacon.name == "RADIATION" && beacon.rssi > -74)
 			{
 				radpoints++;
-				// Create HTML to display beacon data.
-				var element2 = $(
-					'<li>'
-					+   radpoints
-					+ '</li>'
-				);
-			
-				$('#radBeacons').append(element2);
+				document.getElementById("radBeacons").innerHTML = radpoints;
+			}
 			}
 		});
 	}
-
-//	function htmlBeaconRad(beacon)
-//	{
-//			if (beacon.rssi > -74 && beacon.name == "RADIATION") radpoints++;
-//			return radpoints ?
-//			'Radiation: ' + radpoints + '<br/>' :  '';
-//	}
 
 	function htmlBeaconAccuracy(beacon)
 		{var distance = evothings.eddystone.calculateAccuracy(
