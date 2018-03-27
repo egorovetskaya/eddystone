@@ -6,7 +6,10 @@ var app = (function()
 	// Dictionary of beacons.
 	var beacons = {};
 
+	var hitpoints = 100;
+	var suitpoints = 100;
 	var radpoints = 0;
+	var psipoints = 0;
 
 	// Timer that displays list of beacons.
 	var updateTimer = null;
@@ -22,7 +25,7 @@ var app = (function()
 	{
 		// Start tracking beacons!
 		setTimeout(startScan, 500);
-
+		console.log(navigator.notification);
 		// Display refresh timer.
 		updateTimer = setInterval(displayBeaconList, 500);
 	}
@@ -73,7 +76,6 @@ var app = (function()
 	{
 		// Clear beacon display list.
 		$('#found-beacons').empty();
-		//$('#radBeacons').empty();
 
 		// Update beacon display list.
 		var timeNow = Date.now();
@@ -108,9 +110,17 @@ var app = (function()
 			{
 				radpoints++;
 				document.getElementById("radBeacons").innerHTML = radpoints;
+				navigator.notification.beep(1);
 			}
 			}
 		});
+	}
+
+	document.getElementById("radBeacons").innerHTML = radpoints;
+
+	function displaystats()
+	{
+
 	}
 
 	function htmlBeaconAccuracy(beacon)
