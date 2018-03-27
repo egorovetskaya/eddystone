@@ -10,7 +10,7 @@ var app = (function()
 
 	// Timer that displays list of beacons.
 	var updateTimer = null;
-
+	var updateTimer2 = null;
 	app.initialize = function()
 	{
 		document.addEventListener(
@@ -26,6 +26,7 @@ var app = (function()
 
 		// Display refresh timer.
 		updateTimer = setInterval(displayBeaconList, 500);
+		updateTimer2 = setInterval(displayRadPoints, 500);
 	}
 
 	function startScan()
@@ -68,7 +69,7 @@ var app = (function()
 		return beaconList;
 	}
 
-
+	
 
 	function displayBeaconList()
 	{
@@ -80,8 +81,8 @@ var app = (function()
 		var timeNow = Date.now();
 		$.each(getSortedBeaconList(beacons), function(index, beacon)
 		{
-			// Only show beacons that are updated during the last 60 seconds.
-			if (beacon.timeStamp + 60000 > timeNow)
+			// Only show beacons that are updated during the last 10 seconds.
+			if (beacon.timeStamp + 10000 > timeNow)
 			{
 				// Create HTML to display beacon data.
 				var element = $(
@@ -98,7 +99,7 @@ var app = (function()
 					+	htmlBeaconRSSI(beacon)
 					+	htmlBeaconRSSIBar(beacon)
 					+   htmlBeaconAccuracy(beacon)
-					+   htmlBeaconRad(beacon)
+
 					+ '</li>'
 				);
 
@@ -109,11 +110,38 @@ var app = (function()
 		});
 	}
 
-	function htmlBeaconRad(beacon)
+	function displayRadPoints()
 	{
-			if (beacon.rssi > -74 && beacon.name == "RADIATION") radpoints++;
-			return radpoints;
+		// Clear beacon display list.
+		$('#radBeacons').empty();
+
+
+		// Update beacon display list.
+		var timeNow = Date.now();
+		$.each(getSortedBeaconList(beacons), function(index, beacon)
+		{
+			// Only show beacons that are updated during the last 10 seconds.
+			if (beacon.name == "RADIATION" && beacon.rssi > -74 && beacon.timeStamp + 10000 > timeNow)
+			{
+				radpoints++;
+				// Create HTML to display beacon data.
+				var element2 = $(
+					'<li>'
+					+   radpoints
+					+ '</li>'
+				);
+			
+				$('#radBeacons').append(element2);
+			}
+		});
 	}
+
+//	function htmlBeaconRad(beacon)
+//	{
+//			if (beacon.rssi > -74 && beacon.name == "RADIATION") radpoints++;
+//			return radpoints ?
+//			'Radiation: ' + radpoints + '<br/>' :  '';
+//	}
 
 	function htmlBeaconAccuracy(beacon)
 		{var distance = evothings.eddystone.calculateAccuracy(
