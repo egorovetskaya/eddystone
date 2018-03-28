@@ -116,10 +116,14 @@ var app = (function()
 	}
 
 	document.getElementById("radBeacons").innerHTML = radpoints;
+	document.getElementById("psiBeacons").innerHTML = psipoints;
+	document.getElementById("hitBeacons").innerHTML = hitpoints;
+	document.getElementById("suitBeacons").innerHTML = suitpoints;
 
 	function displaystats()
 	{
-
+//		document.getElementById("hitBeacons").innerHTML = hitpoints;
+//		document.getElementById("suitBeacons").innerHTML = suitpoints;
 	}
 
 	function htmlBeaconAccuracy(beacon)
