@@ -23,6 +23,12 @@
     {
       "name": "cordova-plugin-ble",
       "version": "2.0.0"
+    },
+    {
+      "name": "cordova-plugin-dialogs"
+    },
+    {
+      "name": "cordova-plugin-vibration"
     }
   ],
   "index-file": "index.html",
@@ -30,5 +36,8 @@
   "icon": "app-icon.png",
   "doc-url": "http://evothings.com/2.2/doc/examples/eddystone-scan.html",
   "long-description": "App that scans for Eddystone beacons and can be used as a starting point for Eddystone apps.",
-  "cordova-id": "com.evothings.examples.eddystonescan"
+  "cordova-id": "com.evothings.examples.eddystonescan",
+  "author-name": "Evothings",
+  "author-email": "build@evothings.com",
+  "author-url": "https://evothings.com"
 }
