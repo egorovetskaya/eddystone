@@ -10,6 +10,16 @@ var app = (function()
 	var suitpoints = 100;
 	var radpoints = 0;
 	var psipoints = 0;
+	var myVar;
+
+	function displayStats()
+	{
+	document.getElementById("radBeacons").innerHTML = radpoints;
+	document.getElementById("psiBeacons").innerHTML = psipoints;
+	document.getElementById("hitBeacons").innerHTML = hitpoints;
+	document.getElementById("suitBeacons").innerHTML = suitpoints;
+	}
+
 
 	// Timer that displays list of beacons.
 	var updateTimer = null;
@@ -27,6 +37,7 @@ var app = (function()
 		setTimeout(startScan, 500);
 		console.log(navigator.notification);
 		console.log(navigator.vibrate);
+
 		// Display refresh timer.
 		updateTimer = setInterval(displayBeaconList, 500);
 	}
@@ -101,30 +112,24 @@ var app = (function()
 				if (beacon.name == "RADIATION" && beacon.rssi > -74)
 			{
 				radpoints++;
-				document.getElementById("radBeacons").innerHTML = radpoints;
 				navigator.notification.beep(1);
 			}
 			else if (beacon.name == "ARTIFACT" && beacon.rssi > -90)
 			{
 				psipoints++;
-				document.getElementById("psiBeacons").innerHTML = psipoints;
 				navigator.vibrate(500);
 			}
 			}
+			displayStats()
 			
 		});
 	}
 
-	document.getElementById("radBeacons").innerHTML = radpoints;
-	document.getElementById("psiBeacons").innerHTML = psipoints;
-	document.getElementById("hitBeacons").innerHTML = hitpoints;
-	document.getElementById("suitBeacons").innerHTML = suitpoints;
 
-	function displaystats()
-	{
-//		document.getElementById("hitBeacons").innerHTML = hitpoints;
-//		document.getElementById("suitBeacons").innerHTML = suitpoints;
-	}
+
+
+
+
 
 	function htmlBeaconAccuracy(beacon)
 		{var distance = evothings.eddystone.calculateAccuracy(
