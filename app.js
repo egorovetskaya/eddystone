@@ -10,7 +10,6 @@ var app = (function()
 	var suitpoints = 100;
 	var radpoints = 0;
 	var psipoints = 0;
-	var myVar;
 
 	function displayStats()
 	{
@@ -37,11 +36,39 @@ var app = (function()
 		setTimeout(startScan, 500);
 		console.log(navigator.notification);
 		console.log(navigator.vibrate);
-
+		console.log(Media);
+		console.log(device.cordova);
 		// Display refresh timer.
 		updateTimer = setInterval(displayBeaconList, 500);
 	}
 
+	function playAudio(src) {
+		// HTML5 Audio
+		if (typeof Audio != "undefined") { 
+			new Audio(src).play() ;
+	
+		// Phonegap media
+		} else if (typeof device != "undefined") {
+	
+			// Android needs the search path explicitly specified
+			if (device.platform == 'Android') {
+				src = '/android_asset/www/' + src;
+			}
+	
+			var mediaRes = new Media(src,
+				function onSuccess() {
+				   // release the media resource once finished playing
+				   mediaRes.release();
+				},
+				function onError(e){
+					console.log("error playing sound: " + JSON.stringify(e));
+				});
+			 mediaRes.play();
+	   } else {
+		   console.log("no sound API to play: " + src);
+	   }
+	}
+	
 	function startScan()
 	{
 		// Called continuously when ranging beacons.
@@ -112,24 +139,19 @@ var app = (function()
 				if (beacon.name == "RADIATION" && beacon.rssi > -74)
 			{
 				radpoints++;
-				navigator.notification.beep(1);
+				navigator.vibrate(150);
+				playAudio("audio/geiger_7.mp3");
 			}
 			else if (beacon.name == "ARTIFACT" && beacon.rssi > -90)
 			{
 				psipoints++;
-				navigator.vibrate(500);
+				playAudio("audio/contact_1.mp3");
+				navigator.vibrate(150);
 			}
 			}
 			displayStats()
-			
 		});
 	}
-
-
-
-
-
-
 
 	function htmlBeaconAccuracy(beacon)
 		{var distance = evothings.eddystone.calculateAccuracy(
