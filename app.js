@@ -6,7 +6,20 @@ var app = (function()
 	// Dictionary of beacons.
 	var beacons = {};
 
+	var hitpoints = 100;
+	var suitpoints = 100;
 	var radpoints = 0;
+	var psipoints = 0;
+	var myVar;
+
+	function displayStats()
+	{
+	document.getElementById("radBeacons").innerHTML = radpoints;
+	document.getElementById("psiBeacons").innerHTML = psipoints;
+	document.getElementById("hitBeacons").innerHTML = hitpoints;
+	document.getElementById("suitBeacons").innerHTML = suitpoints;
+	}
+
 
 	// Timer that displays list of beacons.
 	var updateTimer = null;
@@ -22,6 +35,8 @@ var app = (function()
 	{
 		// Start tracking beacons!
 		setTimeout(startScan, 500);
+		console.log(navigator.notification);
+		console.log(navigator.vibrate);
 
 		// Display refresh timer.
 		updateTimer = setInterval(displayBeaconList, 500);
@@ -73,7 +88,6 @@ var app = (function()
 	{
 		// Clear beacon display list.
 		$('#found-beacons').empty();
-		//$('#radBeacons').empty();
 
 		// Update beacon display list.
 		var timeNow = Date.now();
@@ -86,15 +100,6 @@ var app = (function()
 				var element = $(
 					'<li>'
 					+	htmlBeaconName(beacon)
-					+	htmlBeaconURL(beacon)
-					+	htmlBeaconNID(beacon)
-					+	htmlBeaconBID(beacon)
-					+	htmlBeaconVoltage(beacon)
-					+	htmlBeaconTemperature(beacon)
-					+	htmlBeaconTxPower(beacon)
-					+	htmlBeaconAdvCnt(beacon)
-					+	htmlBeaconDsecCnt(beacon)
-					+	htmlBeaconRSSI(beacon)
 					+	htmlBeaconRSSIBar(beacon)
 					+   htmlBeaconAccuracy(beacon)
 
@@ -107,11 +112,24 @@ var app = (function()
 				if (beacon.name == "RADIATION" && beacon.rssi > -74)
 			{
 				radpoints++;
-				document.getElementById("radBeacons").innerHTML = radpoints;
+				navigator.notification.beep(1);
+			}
+			else if (beacon.name == "ARTIFACT" && beacon.rssi > -90)
+			{
+				psipoints++;
+				navigator.vibrate(500);
 			}
 			}
+			displayStats()
+			
 		});
 	}
+
+
+
+
+
+
 
 	function htmlBeaconAccuracy(beacon)
 		{var distance = evothings.eddystone.calculateAccuracy(
