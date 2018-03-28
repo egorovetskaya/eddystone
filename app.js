@@ -14,10 +14,10 @@ var app = (function()
 
 	function displayStats()
 	{
-	document.getElementById("radBeacons").innerHTML = radpoints;
-	document.getElementById("psiBeacons").innerHTML = psipoints;
-	document.getElementById("hitBeacons").innerHTML = hitpoints;
-	document.getElementById("suitBeacons").innerHTML = suitpoints;
+	document.getElementById("radBeacons").innerHTML = "Rad "+radpoints;
+	document.getElementById("psiBeacons").innerHTML = "Psi "+psipoints;
+	document.getElementById("hitBeacons").innerHTML = "Hit "+hitpoints;
+	document.getElementById("suitBeacons").innerHTML = "Suit "+suitpoints;
 	}
 
 

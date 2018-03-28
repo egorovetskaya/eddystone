@@ -8,14 +8,18 @@
 		<link rel="stylesheet" href="styles/evothings-app.css">
 	</head>			
 		
-	<body body onload="displaystats()">	
-		<div class="frame"></div>
+	<body>
+
+		</div>
+		 <div class="grid">
+			<div style="font-size:20px; float: left; margin-right: 20px" id="hitBeacons"></div>	
+			<div style="font-size:20px; float: left; margin-right: 20px" id="suitBeacons"></div>
+			<div style="font-size:20px; float: left; margin-right: 20px" id="radBeacons"></div>
+			<div style="font-size:20px;" id="psiBeacons"></div>
+		</div>
 		<h1>Detector</h1>
 		<p id="message">Nothing is found</p>
-		<div style="font-size:20px;" id="hitBeacons"></div>
-		<div style="font-size:20px;" id="suitBeacons"></div>
-		<div style="font-size:20px;" id="radBeacons"></div>
-		<div style="font-size:20px;" id="psiBeacons"></div>
+
 		<ul id="found-beacons" class="dynamic"></ul>
 			<script>
 			// Redirect console.log to Evothings Workbench.
