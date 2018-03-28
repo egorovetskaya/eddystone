@@ -102,7 +102,7 @@ var app = (function()
 					+	htmlBeaconName(beacon)
 					+	htmlBeaconRSSIBar(beacon)
 					+   htmlBeaconAccuracy(beacon)
-
+					+	htmlBeaconRSSI(beacon)
 					+ '</li>'
 				);
 
