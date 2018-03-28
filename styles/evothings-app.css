@@ -773,11 +773,11 @@ input.btn-group.black:checked + label {
 	body { font-size: 4.5vw; }
 }
 .frame {
-	/*width: 100%;
-	height: 50px;*/
+	width: 100%;
+	height: 50px;
 	background-color: #f3f3f3;
     border-bottom-width: 2px; /* Толщина линии внизу */
-    /*border-bottom-style: solid; /* Стиль линии внизу */
-    /* border-bottom-color: black;/* Цвет линии внизу */
+    border-bottom-style: solid; /* Стиль линии внизу */
+    border-bottom-color: black;/* Цвет линии внизу */
 
 }
